@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <meta name="msapplication-navbutton-color" content="#000000">
+    <meta name="apple-mobile-web-app-title" content="Haikal Academic">
+    <title>Haikal Academic Services - Solusi Akademik Profesional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* Mobile form focus styles */
+.mobile-device .form-group.focused label {
+  color: var(--primary-neon);
+  transform: translateY(-2px);
+}
+
+.mobile-device .form-group.focused input,
+.mobile-device .form-group.focused select,
+.mobile-device .form-group.focused textarea {
+  border-color: var(--primary-neon);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Mobile viewport height fix */
+.hero {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Mobile safe area */
+@supports (padding: max(0px)) {
+  .container {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  
+  .header {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+</style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner-ring"></div>
+            <div class="loading-text">Haikal Academic Services</div>
+        </div>
+    </div>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Haikal Academic Services</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#layanan" class="nav-link">Layanan</a></li>
+                    <li><a href="#mengapa-kami" class="nav-link">Mengapa Kami</a></li>
+                    <li><a href="#testimoni" class="nav-link">Testimoni</a></li>
+                    <li><a href="#pemesanan" class="nav-link">Pemesanan</a></li>
+                    <li><a href="#kontak" class="nav-link">Kontak</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Solusi Akademik Profesional untuk Mahasiswa Cerdas</h1>
+                <p class="hero-subtitle">Layanan bantu akademik terpercaya, cepat, dan etis. Kami pastikan hasil rapi, tepat waktu, dan berkualitas.</p>
+                <a href="https://wa.me/6285135891242" class="cta-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Konsultasi Gratis Sekarang
+                </a>
+            </div>
+            <div class="hero-illustration">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="tentang">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title">Tentang Haikal Academic Services</h2>
+                <p class="about-text">
+                   Haikal Academic Services berkomitmen menjadi solusi akademik terpercaya bagi mahasiswa, pelajar, dan tenaga pendidik. Kami menyediakan layanan bantuan pengerjaan tugas, laporan, serta kebutuhan akademik lainnya dengan standar kualitas tinggi, menjamin kerahasiaan, dan mengedepankan etika kerja profesional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="layanan">
+        <div class="container">
+            <h2 class="section-title">Layanan Kami</h2>
+            
+            <!-- Academic Services -->
+            <div class="service-category">
+                <h3 class="category-title">Layanan Akademik</h3>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Pembuatan Makalah</h4>
+                        <p>Proposal, Jurnal, Review</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-microscope"></i>
+                        <h4>Artikel Ilmiah</h4>
+                        <p>Paper Penelitian</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h4>RPP & Modul Ajar</h4>
+                        <p>Untuk Guru</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-search"></i>
+                        <h4>Research Gap</h4>
+                        <p>& Novelty</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-flask"></i>
+                        <h4>Laporan Praktikum</h4>
+                        <p>Lengkap & Rapi</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-pen-fancy"></i>
+                        <h4>Essay & Laporan</h4>
+                        <p>Akhir</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-spell-check"></i>
+                        <h4>Proofreading</h4>
+                        <p>& Editing</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-language"></i>
+                        <h4>Terjemahan</h4>
+                        <p>Akademik</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Tugas Kelompok</h4>
+                        <p>Penyelesaian</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multimedia Services -->
+            <div class="service-category">
+                <h3 class="category-title">Layanan Multimedia & Presentasi</h3>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-presentation"></i>
+                        <h4>Pembuatan PPT</h4>
+                        <p>Profesional & Menarik</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-video"></i>
+                        <h4>Editing Video</h4>
+                        <p>Pembelajaran & PPG</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-camera"></i>
+                        <h4>Editing Foto</h4>
+                        <p>Berkualitas Tinggi</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-script"></i>
+                        <h4>Script Video</h4>
+                        <p>Pembuatan</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-microphone"></i>
+                        <h4>Video Storytelling</h4>
+                        <p>+ Voice Over</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="service-category">
+                <h3 class="category-title">Layanan Tambahan</h3>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-keyboard"></i>
+                        <h4>Pengetikan Tugas</h4>
+                        <p>Tulis Tangan</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>Rangkuman</h4>
+                        <p>Materi</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-school"></i>
+                        <h4>Tugas Sekolah</h4>
+                        <p>& Kuliah</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-code"></i>
+                        <h4>Coding Dasar</h4>
+                        <p>Debugging, Dokumentasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="mengapa-kami">
+        <div class="container">
+            <h2 class="section-title">Mengapa Memilih Kami</h2>
+            <div class="why-us-grid">
+                <div class="why-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Cepat & Efisien</h3>
+                    <p>Pengerjaan tepat waktu dengan kualitas terjamin</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Harga Terjangkau</h3>
+                    <p>Tarif kompetitif sesuai budget mahasiswa</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Kualitas Profesional</h3>
+                    <p>Hasil kerja berkualitas tinggi dan rapi</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Privasi Terjaga</h3>
+                    <p>& Gratis Revisi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethics Section -->
+    <section class="ethics">
+        <div class="container">
+            <div class="ethics-content">
+                <h2 class="section-title">Etis & Legal</h2>
+                <p class="ethics-text">
+                    Kami tidak menggantikan peran Anda sebagai pembelajar, melainkan hadir sebagai pendamping dalam proses akademik yang etis dan bertanggung jawab. Setiap layanan yang kami tawarkan dirancang untuk mendukung Anda dalam memahami materi, mengembangkan kemampuan, dan menyelesaikan tugas dengan cara yang tepat dan bermakna.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimoni">
+        <div class="container">
+            <h2 class="section-title">Testimoni Pelanggan</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-container" id="testimonial-container">
+                    <!-- Testimonials will be generated by JavaScript -->
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev" id="prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next" id="next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order" id="pemesanan">
+        <div class="container">
+            <h2 class="section-title">Form Pemesanan</h2>
+            <div class="order-content">
+                <form class="order-form glass-card" id="order-form">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="layanan-pilihan">Pilih Layanan</label>
+                        <select id="layanan-pilihan" name="layanan-pilihan" required>
+                            <option value="">-- Pilih Layanan --</option>
+                            <option value="Pembuatan Makalah">Pembuatan Makalah</option>
+                            <option value="Artikel Ilmiah">Artikel Ilmiah</option>
+                            <option value="RPP & Modul Ajar">RPP & Modul Ajar</option>
+                            <option value="Laporan Praktikum">Laporan Praktikum</option>
+                            <option value="Pembuatan PPT">Pembuatan PPT</option>
+                            <option value="Editing Video">Editing Video</option>
+                            <option value="Coding & Programming">Coding & Programming</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kontak">Nomor WhatsApp</label>
+                        <input type="tel" id="kontak" name="kontak" required placeholder="08xxxxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsi">Deskripsi Singkat (Opsional)</label>
+                        <textarea id="deskripsi" name="deskripsi" rows="3" placeholder="Jelaskan kebutuhan Anda..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn glow-btn">
+                        <span class="btn-text">Kirim ke WhatsApp</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+                <div class="whatsapp-cta">
+                    <p>Atau langsung konsultasi via WhatsApp:</p>
+                    <a href="https://wa.me/6285135891242" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Pesan via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Haikal Academic Services</span>
+                    </div>
+                    <p>Solusi akademik profesional untuk masa depan yang lebih cerah.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <div class="contact-info">
+                        <a href="https://wa.me/6285135891242" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            +62 851 3589 1242
+                        </a>
+                        <a href="mailto:scdatabase_haikal@cloud.id">
+                            <i class="fas fa-envelope"></i>
+                            scdatabase_haikal@cloud.id
+                        </a>
+                        <a href="https://instagram.com/haikal_mrzk" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                            @haikal_mrzk
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Haikal Academic Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
