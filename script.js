@@ -447,97 +447,80 @@ setTimeout(() => {
   }
 }, 2000)
 
-// Mobile-specific enhancements
-function initMobileOptimizations() {
-  // Detect mobile device
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+// Enhanced mobile viewport handling
+function setVH() {
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty("--vh", `${vh}px`)
+}
 
-  if (isMobile) {
-    // Add mobile class to body
+// Better mobile detection
+function isMobileDevice() {
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    window.innerWidth <= 768
+  )
+}
+
+// Mobile-specific optimizations
+function initMobileOptimizations() {
+  if (isMobileDevice()) {
     document.body.classList.add("mobile-device")
 
-    // Optimize touch interactions
-    document.addEventListener("touchstart", () => {}, { passive: true })
-
-    // Prevent zoom on input focus
+    // Prevent zoom on input focus for better UX
     const inputs = document.querySelectorAll("input, select, textarea")
     inputs.forEach((input) => {
       input.addEventListener("focus", () => {
-        const viewport = document.querySelector('meta[name="viewport"]')
-        viewport.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+        if (window.innerWidth < 768) {
+          const viewport = document.querySelector('meta[name="viewport"]')
+          viewport.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+        }
       })
 
       input.addEventListener("blur", () => {
-        const viewport = document.querySelector('meta[name="viewport"]')
-        viewport.setAttribute("content", "width=device-width, initial-scale=1.0")
+        if (window.innerWidth < 768) {
+          const viewport = document.querySelector('meta[name="viewport"]')
+          viewport.setAttribute(
+            "content",
+            "width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0",
+          )
+        }
       })
     })
 
-    // Mobile-specific testimonial swipe
+    // Mobile swipe for testimonials
     let startX = 0
     let endX = 0
-
     const testimonialSlider = document.querySelector(".testimonial-slider")
 
-    testimonialSlider.addEventListener(
-      "touchstart",
-      (e) => {
-        startX = e.touches[0].clientX
-      },
-      { passive: true },
-    )
+    if (testimonialSlider) {
+      testimonialSlider.addEventListener(
+        "touchstart",
+        (e) => {
+          startX = e.touches[0].clientX
+        },
+        { passive: true },
+      )
 
-    testimonialSlider.addEventListener(
-      "touchend",
-      (e) => {
-        endX = e.changedTouches[0].clientX
-        handleSwipe()
-      },
-      { passive: true },
-    )
+      testimonialSlider.addEventListener(
+        "touchend",
+        (e) => {
+          endX = e.changedTouches[0].clientX
+          const diff = startX - endX
+          const threshold = 50
 
-    function handleSwipe() {
-      const threshold = 50
-      const diff = startX - endX
-
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) {
-          nextTestimonial()
-        } else {
-          prevTestimonial()
-        }
-      }
+          if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+              nextTestimonial()
+            } else {
+              prevTestimonial()
+            }
+          }
+        },
+        { passive: true },
+      )
     }
 
-    // Optimize scroll performance on mobile
-    let ticking = false
-
-    function updateOnScroll() {
-      revealOnScroll()
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.removeEventListener("scroll", revealOnScroll)
-    window.addEventListener("scroll", updateOnScroll, { passive: true })
-
-    // Mobile navigation improvements
-    const navLinks = document.querySelectorAll(".nav-link")
-    navLinks.forEach((link) => {
-      link.addEventListener("touchend", function (e) {
-        // Add visual feedback for touch
-        this.style.transform = "scale(0.95)"
-        setTimeout(() => {
-          this.style.transform = "scale(1)"
-        }, 150)
-      })
-    })
-
-    // Improve mobile form experience
+    // Mobile form improvements
     const formInputs = document.querySelectorAll(".form-group input, .form-group select, .form-group textarea")
     formInputs.forEach((input) => {
       input.addEventListener("focus", function () {
@@ -554,97 +537,32 @@ function initMobileOptimizations() {
       })
     })
   }
-
-  // Viewport height fix for mobile browsers
-  function setVH() {
-    const vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty("--vh", `${vh}px`)
-  }
-
-  setVH()
-  window.addEventListener("resize", setVH)
-  window.addEventListener("orientationchange", () => {
-    setTimeout(setVH, 100)
-  })
 }
 
-// Enhanced mobile menu animation
-function enhanceMobileMenu() {
-  const hamburger = document.getElementById("hamburger")
-  const navMenu = document.getElementById("nav-menu")
-
-  hamburger.addEventListener("click", () => {
-    const isActive = navMenu.classList.contains("active")
-
-    if (!isActive) {
-      // Opening animation
-      navMenu.classList.add("active")
-      document.body.style.overflow = "hidden"
-
-      // Animate menu items
-      const menuItems = navMenu.querySelectorAll("li")
-      menuItems.forEach((item, index) => {
-        item.style.opacity = "0"
-        item.style.transform = "translateY(30px)"
-
-        setTimeout(
-          () => {
-            item.style.opacity = "1"
-            item.style.transform = "translateY(0)"
-          },
-          100 + index * 100,
-        )
-      })
-    } else {
-      // Closing animation
-      const menuItems = navMenu.querySelectorAll("li")
-      menuItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.style.opacity = "0"
-          item.style.transform = "translateY(-30px)"
-        }, index * 50)
-      })
-
-      setTimeout(
-        () => {
-          navMenu.classList.remove("active")
-          document.body.style.overflow = "auto"
-        },
-        menuItems.length * 50 + 200,
-      )
-    }
-  })
-
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-      if (navMenu.classList.contains("active")) {
-        hamburger.click()
-      }
-    }
-  })
-}
-
-// Mobile-optimized loading screen
-function optimizeLoadingForMobile() {
-  const isMobile = window.innerWidth <= 768
-
-  if (isMobile) {
-    // Faster loading on mobile
-    setTimeout(() => {
-      loadingOverlay.classList.add("hidden")
-    }, 1000)
-  }
-}
-
-// Initialize mobile optimizations
-document.addEventListener("DOMContentLoaded", () => {
-  initMobileOptimizations()
-  enhanceMobileMenu()
-  optimizeLoadingForMobile()
+// Initialize viewport height and mobile optimizations
+setVH()
+window.addEventListener("resize", setVH)
+window.addEventListener("orientationchange", () => {
+  setTimeout(setVH, 100)
 })
 
-// Mobile-specific notification positioning
+// Initialize mobile optimizations when DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  generateTestimonials()
+  revealOnScroll()
+
+  // Initialize all cards for observation
+  const cards = document.querySelectorAll(".service-card, .why-card, .testimonial-card")
+  cards.forEach((card) => {
+    card.style.opacity = "0"
+    card.style.transform = "translateY(60px)"
+    card.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+    observer.observe(card)
+  })
+  initMobileOptimizations()
+})
+
+// Update notification for mobile
 function showMobileNotification(message, type = "info") {
   const notification = document.createElement("div")
   notification.className = `notification ${type}`
@@ -653,18 +571,17 @@ function showMobileNotification(message, type = "info") {
     <span>${message}</span>
   `
 
-  // Mobile-optimized notification styles
   const isMobile = window.innerWidth <= 768
   notification.style.cssText = `
     position: fixed;
     top: ${isMobile ? "90px" : "100px"};
-    right: ${isMobile ? "10px" : "20px"};
-    left: ${isMobile ? "10px" : "auto"};
+    right: ${isMobile ? "12px" : "20px"};
+    left: ${isMobile ? "12px" : "auto"};
     background: ${type === "success" ? "rgba(0, 255, 0, 0.1)" : "rgba(0, 255, 255, 0.1)"};
     backdrop-filter: blur(20px);
     border: 1px solid ${type === "success" ? "rgba(0, 255, 0, 0.3)" : "rgba(0, 255, 255, 0.3)"};
     color: white;
-    padding: ${isMobile ? "0.8rem 1rem" : "1rem 1.5rem"};
+    padding: ${isMobile ? "1rem" : "1rem 1.5rem"};
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -672,19 +589,17 @@ function showMobileNotification(message, type = "info") {
     z-index: 10000;
     transform: translateY(-100px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: ${isMobile ? "0.9rem" : "1rem"};
-    max-width: ${isMobile ? "calc(100vw - 20px)" : "auto"};
+    font-size: ${isMobile ? "0.95rem" : "1rem"};
+    max-width: ${isMobile ? "calc(100vw - 24px)" : "auto"};
     box-sizing: border-box;
   `
 
   document.body.appendChild(notification)
 
-  // Animate in
   setTimeout(() => {
     notification.style.transform = "translateY(0)"
   }, 100)
 
-  // Remove after delay
   setTimeout(() => {
     notification.style.transform = "translateY(-100px)"
     setTimeout(() => {
@@ -695,7 +610,7 @@ function showMobileNotification(message, type = "info") {
   }, 4000)
 }
 
-// Override the original showNotification for mobile
-if (window.innerWidth <= 768) {
+// Override notification for mobile
+if (isMobileDevice()) {
   window.showNotification = showMobileNotification
 }
